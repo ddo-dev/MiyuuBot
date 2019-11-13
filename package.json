@@ -1,0 +1,21 @@
+{
+  "name": "MiyuuBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "miyuu.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node miyuu.js",
+    "dev": "nodemon miyuu.js"
+  },
+  "keywords": [],
+  "author": "Dieu Do",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
