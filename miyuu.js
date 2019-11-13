@@ -3,7 +3,7 @@ const client = new Discord.Client()
 require('dotenv').config()
 
 client.on('ready', () => {
-    console.log('logged in as ${client.user.tag}!')
+    console.log(`logged in as ${client.user.tag}!`)
 })
 
 client.on('guildMemberAdd', member=>{
@@ -19,9 +19,9 @@ client.on('message', message => {
 })
 
 client.on('message', message => {
-    if (message.content === 'miyuu test') {
-        message.author.send(
-            'testing'
+    if (message.content.startsWith('miyuu test')) {
+        message.mentions.members.first().send(
+            `testing mentions ${message.mentions.members.first()}`
         )
     }
 })
@@ -52,7 +52,7 @@ client.on('message', message => {
 
         return member
             .kick()
-            .then(() => message.reply('${member.user.tag} was kicked by ${member.author.username}.'))
+            .then(() => message.reply(`${member.user.tag} was kicked by ${member.author.username}.`))
             .catch(error => message.reply('Sorry, there was an error.'))
     }
 })
@@ -63,12 +63,13 @@ client.on('message', message => {
         message.member.send(member.user.tag)
         if(!member) {
             return message.reply(
-                'Who are you mentioning, ${message.author.tag}?'
+                `Who are you mentioning, ${message.author.tag}?`
             )
         }
 
         return message.channel.send(
-                '@' + member.user.tag + ' ${member.user.tag} is calling for you!'
+                `${message.author.tag} is calling for you!\n` +
+                `${member.user.tag} mentioned`
             )
             .then(() => message.member.send(member.user.tag))
             .catch(error => message.reply('Something broke'))
