@@ -31,7 +31,9 @@ client.on('message', message => {
         message.author.send(
             'Please type "miyuu" before the command to call on me!\n' +
             '   "help" - sends instruction set on how to use me\n' +
-            '   "marco" - I will reply with "Polo"'
+            '   "marco" - I will reply with "Polo"\n' +
+            '   "kick @tag" - Will kick member mentioned if you have proper authority\n' +
+            '   "call @tag" - Calls Mentioned tagged user\n'
         )
     }
 })
@@ -58,21 +60,23 @@ client.on('message', message => {
 })
 
 client.on('message', message => {
-    if(message.content.startsWith('miyuu mention')){
+    if(message.content.startsWith('miyuu call')){
         const member = message.mentions.members.first()
-        message.member.send(member.user.tag)
+        //message.member.send(member.user.tag)
+
         if(!member) {
             return message.reply(
-                `Who are you mentioning, ${message.author.tag}?`
+                `Who are you calling, ${message.author.tag}?`
             )
         }
 
         return message.channel.send(
-                `${message.author.tag} is calling for you!\n` +
-                `${member.user.tag} mentioned`
+                `${member.user}! ${message.author} is calling for you!`
             )
-            .then(() => message.member.send(member.user.tag))
+            .then(() => member.user.send(`${message.author} is calling you!`))
             .catch(error => message.reply('Something broke'))
     }
 })
+
+
 client.login(process.env.BOT_TOKEN)
