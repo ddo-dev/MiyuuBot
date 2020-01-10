@@ -73,7 +73,7 @@ client.on('message', message => {
         return message.channel.send(
                 `${member.user}! ${message.author} is calling for you!`
             )
-            .then(() => member.user.send(`${message.author} is calling you!`))
+            .then(() => member.user.send(`${message.author} is calling you!!!!`))
             .catch(error => message.reply('Something broke'))
     }
 })
